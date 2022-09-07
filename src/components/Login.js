@@ -1,58 +1,62 @@
 import styled from "styled-components"
 import { Link } from "react-router-dom";
 
+
 export default function Login(){
     return(
-        <Lugin>
+        <Formulario>
             <Logo>
         <h1>MyWallet</h1>
         <form>
-            <input type='email' placeholder='email'/>
-            <input type='password' placeholder='senha'/>
-            <button>Entrar</button>
-            <h2>Primeira vez? Cadastre-se!</h2>
+            <input type='email' placeholder='E-mail'/>
+            <input type='password' placeholder='Senha'/>
+            <Link to='/Lobby'><button>Entrar</button></Link>
+            <Link to="/Sign-up"><h2>Primeira vez? Cadastre-se!</h2></Link>
         </form>
             </Logo>
-        </Lugin>
+        </Formulario>
     )
 }
 
 
- const Lugin=styled.div`
- 
-    display:flex;
-     width:100%;
-
-     background-color:#8C11BE;
-     margin: auto;
+ const Formulario=styled.div`
+        display:flex;
+        height:100vh;
      `
-
+    
      const Logo=styled.div`
-     display:flex;
+    display:flex;
      flex-direction:column;
      width:50%;
      margin:auto;
-
-
-     justify-content:center;
+    
+    justify-content:center;
      align-items:center;
-     
-
-     width:50%;
+     a{
+        text-decoration:none;
+     }
          h1{
                  color:#FFFFFF;
-                 font-size:50px;
+                 font-size:40px;
+                 margin-bottom:15px;
                  font-family: 'Black Ops One', cursive;
              }
         
         input{
-            width:20rem;
-            margin-bottom:10px;
+            width:23rem;
+            margin-bottom:15px;
+            border-radius:5px;
+            border:none;
+            height:5vh;
+            padding-left:15px;
+
+
         }
         input::placeholder{
             margin-left:105px;
-            font-size:18px;
-            color:#DBDBDB;
+            font-size:19px;
+            color:#404040;
+            font-family:'Lexend Deca',cursive;
             }
 
         form{
@@ -60,6 +64,31 @@ export default function Login(){
             flex-direction:column;
           
         }
-            `
+        button{
+            width:24rem;
+            border:none;
+            border-radius:5px;
+            height:4vh;
+            background-color:#A328D6;
+            font-weight:700;
+            font-size:20px;
+            color:#FFFFFF;
+            margin-bottom:60px;
+            font-family:'Lexend Deca',cursive;
+            :active{
+                background-color:#FFFFFF;
+                color:#A328D6;
+                    }
+            
+        }
+       
+        h2{
+            text-align:center;
+            font-weight:700;
+            font-size:15px;
+            color:#FFFFFF;
+            font-family:'Lexend Deca',cursive;
+        }
+        `
 
 
