@@ -12,19 +12,29 @@ export default function Lobby(){
         <Main>
             <Header>
                <h1>Lobby</h1>
-             <VscSignOut style={exit}/>
+            <Link to='/'><VscSignOut style={exit}/></Link> 
             </Header>
             <Dados>
+                <h2>
+                       Não há registros de entrada ou saída 
+                </h2>
             </Dados>
             <Container>
-                <div>
-                <VscDiffAdded style={add}/>
-                <h1>Nova entrada</h1>
-                </div>
-                <div>
-                <VscDiffRemoved style={add}/>
-                <h1>Nova saída</h1>
-                </div>
+                 
+                    <div>
+                    <Link to="/Deposit"  style={{ textDecoration: 'none',color:'#FFFFFF'}}>
+                    <VscDiffAdded style={add}/>
+                    <h1>Nova entrada</h1>
+                    </Link>
+                    </div>
+                    <div> 
+                    <Link to="/Out" style={{ textDecoration: 'none',color:'#FFFFFF'}}>
+                    <VscDiffRemoved style={add}/>
+                    <h1>Nova saída</h1> 
+                    </Link>
+                    </div>
+               
+               
             </Container>
         </Main>
     )
@@ -35,6 +45,7 @@ const Main=styled.div`
         font-family:'Lexend Deca',cursive;
         padding-left:150px;
         padding-right:150px;
+        
 `
 const Header=styled.div`
         display:flex;
@@ -50,11 +61,21 @@ const Header=styled.div`
         margin-bottom:12px;
 `
 const Dados=styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
     height:60vh;
     width:100%;
     background-color:#FFFFFF;
     border-radius:5px;
     margin-bottom:10px;
+    h2{
+        background-color:#FFFFFF;
+        text-align:center;
+        font-size:25px;
+        color:#C2C2C2;
+        width:45%;
+    }
 `
 const Container=styled.div`
     display:flex;
@@ -62,8 +83,7 @@ const Container=styled.div`
     
     div{
         display:flex;
-        flex-direction:column;
-        justify-content:space-around;
+       
         height:25vh;
         width:48%;
         background-color:#A328D6;
@@ -75,6 +95,14 @@ const Container=styled.div`
             color:#FFFFFF;
             width:10px;
             font-size:25px;
+        }
+        a{
+            display:flex;
+            flex-direction:column;
+            justify-content:space-around;
+            background-color:#A328D6;
+            height:100%;
+            
         }
     }
 `

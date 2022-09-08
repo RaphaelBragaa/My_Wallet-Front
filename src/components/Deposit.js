@@ -1,51 +1,50 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom";
-import { useState} from 'react';
-import axios from 'axios'
+import { useParams, useNavigate,Link } from 'react-router-dom';
 
-
-export default function Login(){
-    const [email,setEmail]=useState("")
-    const[password,setPassword]=useState("")
-
-    async function Logar(event){
-        event.preventDefault()
-        const body={
-            email,
-            password,
-        }
-        try{
-            const promise= await axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',body)
-            console.log(promise)
-        }catch(error){
-            console.log('error')
-        }
-    }
+export default function Deposit(){
+    const {Deposit}=useParams()
     return(
-        <Formulario>
+        <Main>
+            <Header>
+             Nova Entrada
+            </Header>
             <Logo>
-        <h1>MyWallet</h1>
-        <form onSubmit={Logar}>
-            <input type='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='E-mail'/>
-            <input type='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Senha'/>
-           <button type='submit'>Entrar</button>
-            <Link to="/Sign-up"><h2>Primeira vez? Cadastre-se!</h2></Link>
+        <form>
+            <input type='number' placeholder='Valor'/>
+            <input type='text' placeholder='Descrição'/>
+            <Link to='/Lobby'><button>Salvar entrada</button></Link>
         </form>
             </Logo>
-        </Formulario>
+        
+        </Main>
     )
 }
 
-
- const Formulario=styled.div`
-        display:flex;
+const Main=styled.div`
         height:100vh;
-     `
-    
-     const Logo=styled.div`
+        font-family:'Lexend Deca',cursive;
+        padding-left:150px;
+        padding-right:150px;
+        
+`
+const Header=styled.div`
+        display:flex;
+        align-items:center;
+        justify-content: space-between;
+        top:0;
+        left:0;
+        height:8vh;
+        width:100%;
+        font-weight:700;
+        font-size:30px;
+        color:#FFFFFF;
+        margin-bottom:12px;
+`
+
+const Logo=styled.div`
     display:flex;
      flex-direction:column;
-     width:50%;
+     width:100%;
      margin:auto;
     
     justify-content:center;
@@ -61,7 +60,7 @@ export default function Login(){
              }
         
         input{
-            width:23rem;
+            width:38rem;
             margin-bottom:15px;
             border-radius:5px;
             border:none;
@@ -83,10 +82,10 @@ export default function Login(){
           
         }
         button{
-            width:24rem;
+            width:39rem;
             border:none;
             border-radius:5px;
-            height:4vh;
+            height:5.5vh;
             background-color:#A328D6;
             font-weight:700;
             font-size:20px;
@@ -108,5 +107,4 @@ export default function Login(){
             font-family:'Lexend Deca',cursive;
         }
         `
-
 
