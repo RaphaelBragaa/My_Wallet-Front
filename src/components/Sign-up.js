@@ -24,11 +24,11 @@ export default function Sign(){
             }
 
             try{
-                const promise=await axios.post("http://localhost:5000/Sign",body)
+                const promise=await axios.post("http://localhost:5000/cadastro",body)
                 console.log(promise)
                 navigate('/')
             }catch(error){
-                console.log('error')
+                console.log(error)
             }
 
 

@@ -1,10 +1,12 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useState} from 'react';
 import axios from 'axios'
 
 
 export default function Login(){
+
+    const navigate=useNavigate()
     const [email,setEmail]=useState("")
     const[password,setPassword]=useState("")
 
@@ -15,10 +17,15 @@ export default function Login(){
             password,
         }
         try{
-            const promise= await axios.post('https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login',body)
+            const promise= await axios.post("http://localhost:5000/login",body)
             console.log(promise)
+             setEmail(promise.email)
+             setPassword(promise.token)
+            navigate("/Lobby")
+
         }catch(error){
-            console.log('error')
+            console.log(error)
+            alert("Dados Incorretos")
         }
     }
     return(

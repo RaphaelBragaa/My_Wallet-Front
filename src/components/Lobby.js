@@ -15,9 +15,12 @@ export default function Lobby(){
             <Link to='/'><VscSignOut style={exit}/></Link> 
             </Header>
             <Dados>
-                <h2>
+                {/* <h2>
                        Não há registros de entrada ou saída 
-                </h2>
+                </h2> */}
+                <Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash>
+                 <Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash>
+                 <Totally><h1>SALDO</h1><h2>13,99</h2></Totally>
             </Dados>
             <Container>
                  
@@ -62,8 +65,12 @@ const Header=styled.div`
 `
 const Dados=styled.div`
     display:flex;
-    justify-content:center;
-    align-items:center;
+    justify-content:baseline;
+    flex-direction:column;
+    //align-items:center;
+
+    padding-top:40px;
+    padding-left:20px;
     height:60vh;
     width:100%;
     background-color:#FFFFFF;
@@ -76,7 +83,31 @@ const Dados=styled.div`
         color:#C2C2C2;
         width:45%;
     }
+    
 `
+const Cash=styled.div`
+
+    display:flex;
+    background-color:#FFFFFF;
+    font-size:20px;
+    margin-bottom:20px;
+
+    h3{
+        background-color:#FFFFFF;
+        color:#DBDBDB;
+        margin-right:20px;
+    }
+    h4{
+        background-color:#FFFFFF;
+
+    }
+    h5{
+        background-color:#FFFFFF;
+        margin-left:35vh;
+        color:red;
+    }
+`
+
 const Container=styled.div`
     display:flex;
     justify-content:space-between;
@@ -104,5 +135,18 @@ const Container=styled.div`
             height:100%;
             
         }
+    }
+`
+
+const Totally=styled.div`
+    display:flex;
+    background-color:#FFFFFF;
+    font-size:20px;
+    h1{
+        background-color:#FFFFFF;
+        font-weight:700;
+    }
+    h2{
+
     }
 `
