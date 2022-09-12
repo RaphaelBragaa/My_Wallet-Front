@@ -60,6 +60,10 @@ export default function Lobby({name,token,setName,setToken}){
     Entradas()
 },total)
 
+
+    const teste=function te(){
+        <h1>TESTES MEU AMOR</h1>
+    }
     
     const exit={ color: "white", fontSize: "1.5em" }
     const add={color: "white", fontSize: "2.5em"}
@@ -77,6 +81,7 @@ export default function Lobby({name,token,setName,setToken}){
                     <Caixa>
                      {dados.map((dado)=>{return(<Cash date={dado.date} description={dado.description} value={dado.value} isEntry={dado.isEntry}/>)})}
                     </Caixa> 
+                    
                      <Totally><h1>SALDO</h1><h6>...</h6></Totally> 
                 </Dados> 
                
@@ -128,9 +133,6 @@ const Dados=styled.div`
     justify-content: space-between;
     
     flex-direction:column;
-    align-items:normal; //ESSE---------
-     justify-content:flex-end;//ESSE--------- */
-
     padding-top:30px;
     padding-left:20px;
     padding-bottom:20px;
