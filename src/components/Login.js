@@ -16,6 +16,7 @@ export default function Login({setName,setToken}){
             email,
             password,
         }
+        console.log(body)
         try{
             const promise= await axios.post("http://localhost:5000/login",body)
             console.log(promise)

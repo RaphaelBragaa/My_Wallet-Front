@@ -4,10 +4,14 @@ import { VscSignOut} from "@react-icons/all-files/vsc/VscSignOut"
 import {VscDiffAdded } from "@react-icons/all-files/vsc/VscDiffAdded"
 import {VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved"
 import axios from 'axios'
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
+
 
 export default function Lobby({name,token,setName,setToken}){
-    console.log(token)
+   const {Lobby} = useParams()
+
+    const[dados,setDados]=useState([])
+    const [total,setTotal]=useState(0)
 
     const config={
         headers:{Authorization:`Bearer ${token}`}
@@ -15,18 +19,43 @@ export default function Lobby({name,token,setName,setToken}){
 
    useEffect( ()=>{
     async function Permission(){
+        
         try{
           const promise = await axios.get('http://localhost:5000/posts',config)
             	setName(promise.data.name)
-                console.log(promise)
+                
         }catch(error){
             console.log(error)
         }
     }
-    Permission()
-},[])
+    async function Entradas(){
+        try{
+            const promise = await axios.get('http://localhost:5000/moneys',config)
+            setDados(promise.data)
+            alert(dados)
+          
+             for(let i=0;i<dados.length;i++){
+                 if(dados){
+                    console.log(dados[i].isEntry)
+                    let number = parseInt(dados[i].value)
+                    alert(number)
+                    setTotal(300)
+             }
+             console.log(total)
+             }
+           
+          
+        }catch(error){
+            console.log(error)
+        }
+    }
 
-    const {Lobby}=useParams()
+
+    Permission()
+    Entradas()
+},total)
+
+    
     const exit={ color: "white", fontSize: "1.5em" }
     const add={color: "white", fontSize: "2.5em"}
     return(
@@ -41,8 +70,9 @@ export default function Lobby({name,token,setName,setToken}){
                         Não há registros de entrada ou saída 
                     </h2> */} 
                     <Caixa>
-                    <Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash>
-                    <Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash>
+                    {/*<Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash> */}
+                     {dados.map((dado)=>{return(<Cash><h3>{dado.date}</h3> <h4>{dado.description}</h4> <h5>{dado.value}</h5></Cash>)})}
+                    
                     </Caixa> 
                     <Totally><h1>SALDO</h1><h6>13,99</h6></Totally>
                 </Dados> 

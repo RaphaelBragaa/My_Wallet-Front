@@ -1,17 +1,46 @@
 import styled from "styled-components"
 import { useParams, useNavigate,Link } from 'react-router-dom';
+import { useState } from "react";
+import axios from "axios";
 
-export default function Out(){
+export default function Out({token}){
     const {Out}=useParams()
+    const [value,setValue]=useState("")
+    const [description,setDescription]=useState("")
+    console.log(token)
+    
+    const {Deposit}=useParams()
+    const navigate=useNavigate()
+
+    const config={
+        headers:{Authorization:`Bearer ${token}`}
+    }
+
+    const body={
+        description,
+        value,
+        isEntry:false
+    }
+    
+        async function Inserir(event){
+            event.preventDefault()
+            try{
+              const promise = await axios.post('http://localhost:5000/moneys',body,config)
+              console.log(promise)
+                navigate("/Lobby")
+            }catch(error){
+                alert(error)
+            }
+        }
     return(
         <Main>
             <Header>
              Nova Saída
             </Header>
             <Logo>
-        <form>
-            <input type='number' placeholder='Valor'/>
-            <input type='text' placeholder='Descrição'/>
+            <form onSubmit={Inserir}>
+            <input type='number' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
+            <input type='text' onChange={(e)=>setDescription(e.target.value)}placeholder='Descrição'/>
             <Link to='/Lobby'><button>Salvar saída</button></Link>
         </form>
             </Logo>

@@ -20,8 +20,8 @@ function App() {
          <Route path='/' element={<Login setName={setName} setToken={setToken}/>}></Route> 
          <Route path='/Sign-up' element={<Sign />}></Route>
          <Route path='/Lobby' element={<Lobby name={name} token={token} setName={setName} setToken={setToken}/>}></Route>
-         <Route path='/Out' element={<Out/>}></Route>
-         <Route path='/Deposit' element={<Deposit/>}></Route>
+         <Route path='/Out' element={<Out token={token}/>}></Route>
+         <Route path='/Deposit' element={<Deposit token={token}/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
