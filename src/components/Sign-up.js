@@ -22,6 +22,7 @@ export default function Sign(){
                 email,
                 password:password1,
             }
+            console.log(typeof(password1))
 
             try{
                 const promise=await axios.post("http://localhost:5000/cadastro",body)

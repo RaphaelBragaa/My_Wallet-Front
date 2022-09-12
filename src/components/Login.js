@@ -4,7 +4,8 @@ import { useState} from 'react';
 import axios from 'axios'
 
 
-export default function Login({setName,setToken}){
+
+export default function Login({setName,token,setToken}){
 
     const navigate=useNavigate()
     const [email,setEmail]=useState("")
@@ -21,7 +22,7 @@ export default function Login({setName,setToken}){
             const promise= await axios.post("http://localhost:5000/login",body)
             console.log(promise)
              setToken(promise.data)
-            navigate("/Lobby")
+            navigate(`/Lobby`,token={token})
 
         }catch(error){
             console.log(error)

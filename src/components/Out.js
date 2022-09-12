@@ -41,7 +41,7 @@ export default function Out({token}){
             <form onSubmit={Inserir}>
             <input type='number' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
             <input type='text' onChange={(e)=>setDescription(e.target.value)}placeholder='Descrição'/>
-            <Link to='/Lobby'><button>Salvar saída</button></Link>
+            <button type='submit'>Salvar saída</button>
         </form>
             </Logo>
         

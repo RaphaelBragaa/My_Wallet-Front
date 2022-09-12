@@ -5,10 +5,15 @@ import {VscDiffAdded } from "@react-icons/all-files/vsc/VscDiffAdded"
 import {VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved"
 import axios from 'axios'
 import { useEffect,useState } from "react";
+import {useLocation} from 'react-router-dom'
+import Cash from "./Cash";
 
 
 export default function Lobby({name,token,setName,setToken}){
    const {Lobby} = useParams()
+   const location = useLocation();
+   console.log(location.token)
+   console.log(token)
 
     const[dados,setDados]=useState([])
     const [total,setTotal]=useState(0)
@@ -23,7 +28,7 @@ export default function Lobby({name,token,setName,setToken}){
         try{
           const promise = await axios.get('http://localhost:5000/posts',config)
             	setName(promise.data.name)
-                
+                console.log(name)
         }catch(error){
             console.log(error)
         }
@@ -32,13 +37,13 @@ export default function Lobby({name,token,setName,setToken}){
         try{
             const promise = await axios.get('http://localhost:5000/moneys',config)
             setDados(promise.data)
-            alert(dados)
+           
           
              for(let i=0;i<dados.length;i++){
                  if(dados){
                     console.log(dados[i].isEntry)
                     let number = parseInt(dados[i].value)
-                    alert(number)
+                
                     setTotal(300)
              }
              console.log(total)
@@ -66,15 +71,13 @@ export default function Lobby({name,token,setName,setToken}){
             </Header>
            
                 <Dados>
-                    {/* <h2>
+                     {/* <h2>
                         Não há registros de entrada ou saída 
-                    </h2> */} 
+                    </h2>  */}
                     <Caixa>
-                    {/*<Cash><h3>30/11</h3> <h4>Almoço mãe </h4> <h5>39,90</h5></Cash> */}
-                     {dados.map((dado)=>{return(<Cash><h3>{dado.date}</h3> <h4>{dado.description}</h4> <h5>{dado.value}</h5></Cash>)})}
-                    
+                     {dados.map((dado)=>{return(<Cash date={dado.date} description={dado.description} value={dado.value} isEntry={dado.isEntry}/>)})}
                     </Caixa> 
-                    <Totally><h1>SALDO</h1><h6>13,99</h6></Totally>
+                     <Totally><h1>SALDO</h1><h6>...</h6></Totally> 
                 </Dados> 
                
             
@@ -125,7 +128,8 @@ const Dados=styled.div`
     justify-content: space-between;
     
     flex-direction:column;
-    //align-items:center;
+    align-items:normal; //ESSE---------
+     justify-content:flex-end;//ESSE--------- */
 
     padding-top:30px;
     padding-left:20px;
@@ -144,30 +148,7 @@ const Dados=styled.div`
     }
     
 `
-const Cash=styled.div`
 
-    display:flex;
-   
-    background-color:#FFFFFF;
-    font-size:20px;
-    margin-bottom:20px;
-   
-
-    h3{
-        background-color:#FFFFFF;
-        color:#DBDBDB;
-        margin-right:20px;
-    }
-    h4{
-        background-color:#FFFFFF;
-
-    }
-    h5{
-        background-color:#FFFFFF;
-        margin-left:35vh;
-        color:red;
-    }
-`
 
 const Container=styled.div`
     display:flex;
