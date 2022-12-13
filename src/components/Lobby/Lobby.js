@@ -6,7 +6,7 @@ import {VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved"
 import axios from 'axios'
 import { useEffect,useState } from "react";
 import {useLocation} from 'react-router-dom'
-import Cash from "./Cash";
+import Cash from "../Cash";
 
 
 export default function Lobby({name,token,setName,setToken}){
@@ -24,7 +24,7 @@ export default function Lobby({name,token,setName,setToken}){
 
    useEffect( ()=>{
     async function Permission(){
-        
+      
         try{
           const promise = await axios.get('http://localhost:5000/posts',config)
             	setName(promise.data.name)
@@ -33,16 +33,21 @@ export default function Lobby({name,token,setName,setToken}){
             console.log(error)
         }
     }
-    async function Entradas(){
+    async function Entradas(){ 
+        
         try{
             const promise = await axios.get('http://localhost:5000/moneys',config)
             setDados(promise.data)
+            console.log(typeof(dados[1].value))
+            dados.map((dado,soma)=>{return(
+              soma =  parseFloat(dado.value) + soma
+             
+            )})
            
-          
              for(let i=0;i<dados.length;i++){
                  if(dados){
                     console.log(dados[i].isEntry)
-                    let number = parseInt(dados[i].value)
+                   // let number = parseInt(dados[i].value)
                 
                     setTotal(300)
              }
@@ -58,12 +63,10 @@ export default function Lobby({name,token,setName,setToken}){
 
     Permission()
     Entradas()
-},total)
+},[total,dados])
 
 
-    const teste=function te(){
-        <h1>TESTES MEU AMOR</h1>
-    }
+  
     
     const exit={ color: "white", fontSize: "1.5em" }
     const add={color: "white", fontSize: "2.5em"}

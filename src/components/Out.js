@@ -39,7 +39,7 @@ export default function Out({token}){
             </Header>
             <Logo>
             <form onSubmit={Inserir}>
-            <input type='number' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
+            <input type='text' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
             <input type='text' onChange={(e)=>setDescription(e.target.value)}placeholder='Descrição'/>
             <button type='submit'>Salvar saída</button>
         </form>

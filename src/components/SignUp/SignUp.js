@@ -2,52 +2,48 @@ import { useParams, useNavigate,Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios'
 import { useState} from 'react';
+import * as service from "../../Services/wallet";
 
 
-export default function Sign(){
+export default function Signin(){
     const {Sign}=useParams()
 
     const [email, setEmail] = useState("");
-    const [password1, setPassword1] = useState("");
-    const [password2, setPassword2] = useState("");
-    const [name,setName]=useState("")
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [nome,setNome]=useState("")
 
     const navigate = useNavigate()
 
     async function Cadastro(event){
         event.preventDefault()
-        if(password1===password2){
-            const body={
-                name,
-                email,
-                password:password1,
-            }
-            console.log(typeof(password1))
+        const body = {
+            name:nome,
+            email,
+            password,
+            confirmPassword
+        }
 
+        console.log(body)
             try{
-                const promise=await axios.post("http://localhost:5000/cadastro",body)
-                console.log(promise)
+                await service.signUp(body)
                 navigate('/')
             }catch(error){
                 console.log(error)
+                alert('Senhas não coincidem !')
             }
-
-
-        }else{
-            alert('Senhas não coincidem !')
         }
-    }
 
-    return(
+return (
         <>
         <Formulario>
             <Logo>
         <h1>MyWallet</h1>
         <form onSubmit={Cadastro}>
-            <input type='text' required value={name} onChange={(e)=>setName(e.target.value)}placeholder='Nome'/>
+            <input type='text' required value={nome} onChange={(e)=>setNome(e.target.value)}placeholder='Nome'/>
             <input type='email' required value={email} onChange={(e)=>setEmail((e.target.value))}placeholder='E-mail'/>
-            <input type='password' required value={password1} onChange={(e)=>setPassword1((e.target.value))} placeholder='Senha'/>
-            <input type='password' required value={password2} onChange={(e)=>setPassword2((e.target.value))} placeholder='Confirme a Senha'/>
+            <input type='password' required value={password} onChange={(e)=>setPassword((e.target.value))} placeholder='Senha'/>
+            <input type='password' required value={confirmPassword} onChange={(e)=>setConfirmPassword((e.target.value))} placeholder='Confirme a Senha'/>
             <button type='submit'>Cadastrar</button>
             <Link to="/"><h2>Já tem uma conta? Entre agora!</h2></Link>
         </form>

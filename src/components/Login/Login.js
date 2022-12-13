@@ -1,28 +1,29 @@
 import styled from "styled-components"
 import { Link,useNavigate } from "react-router-dom";
 import { useState} from 'react';
-import axios from 'axios'
+import * as service from "../../Services/wallet";
 
 
 
-export default function Login({setName,token,setToken}){
+export default function Login(){
 
     const navigate=useNavigate()
     const [email,setEmail]=useState("")
     const[password,setPassword]=useState("")
 
-    async function Logar(event){
+    async function Login(event){
         event.preventDefault()
         const body={
             email,
             password,
         }
-        console.log(body)
         try{
-            const promise= await axios.post("http://localhost:5000/login",body)
-            console.log(promise)
-             setToken(promise.data)
-            navigate(`/Lobby`,token={token})
+            const promise= await service.signIn(body);
+            localStorage.setItem(
+            "wallet",
+            JSON.stringify({token: promise.data.token})
+           );
+           navigate("/Lobby");
 
         }catch(error){
             console.log(error)
@@ -33,7 +34,7 @@ export default function Login({setName,token,setToken}){
         <Formulario>
             <Logo>
         <h1>MyWallet</h1>
-        <form onSubmit={Logar}>
+        <form onSubmit={Login}>
             <input type='email' value={email} onChange={(e)=>setEmail(e.target.value)} placeholder='E-mail'/>
             <input type='password' value={password} onChange={(e)=>setPassword(e.target.value)} placeholder='Senha'/>
            <button type='submit'>Entrar</button>

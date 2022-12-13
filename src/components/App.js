@@ -1,8 +1,8 @@
-import GlobalStyle from "./styles/GlobalStyles"
+import GlobalStyle from "./Styles/GlobalStyles"
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./Login";
-import Sign from "./Sign-up";
-import Lobby from "./Lobby";
+import Login from "./Login/Login";
+import Sign from "./SignUp/SignUp";
+import Lobby from "./Lobby/Lobby";
 import Deposit from "./Deposit";
 import Out from "./Out";
 import { useState} from 'react';
