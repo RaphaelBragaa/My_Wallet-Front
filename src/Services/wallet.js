@@ -35,7 +35,7 @@ function insertCash(body) {
 
 function listCash() {
     const config = createHeaders();
-    const promise = axios.post(`${API_URL}/cash`, config);
+    const promise = axios.get(`${API_URL}/cash`, config);
 
     return promise;
 }

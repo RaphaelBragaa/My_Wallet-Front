@@ -4,7 +4,6 @@ import { useState } from "react";
 import axios from "axios";
 
 export default function Out({token}){
-    const {Out}=useParams()
     const [value,setValue]=useState("")
     const [description,setDescription]=useState("")
     console.log(token)
@@ -25,7 +24,7 @@ export default function Out({token}){
         async function Inserir(event){
             event.preventDefault()
             try{
-              const promise = await axios.post('http://localhost:5000/moneys',body,config)
+              const promise = await axios.post('http://localhost:4000/cash',body,config)
               console.log(promise)
                 navigate("/Lobby")
             }catch(error){

@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { useParams, useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { VscSignOut} from "@react-icons/all-files/vsc/VscSignOut"
 import {VscDiffAdded } from "@react-icons/all-files/vsc/VscDiffAdded"
 import {VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved"
@@ -7,63 +7,27 @@ import axios from 'axios'
 import { useEffect,useState } from "react";
 import {useLocation} from 'react-router-dom'
 import Cash from "../Cash";
+import * as service from "../../Services/wallet"
 
 
 export default function Lobby({name,token,setName,setToken}){
-   const {Lobby} = useParams()
-   const location = useLocation();
-   console.log(location.token)
-   console.log(token)
-
+    const navigate = useNavigate()
     const[dados,setDados]=useState([])
     const [total,setTotal]=useState(0)
-
-    const config={
-        headers:{Authorization:`Bearer ${token}`}
-    }
+    const nameUser = JSON.parse(localStorage.getItem("wallet"))?.name;
 
    useEffect( ()=>{
     async function Permission(){
-      
         try{
-          const promise = await axios.get('http://localhost:5000/posts',config)
-            	setName(promise.data.name)
-                console.log(name)
+          const promise = await service.listCash()
+            	setDados(promise.data)
+                console.log(promise)
         }catch(error){
             console.log(error)
         }
     }
-    async function Entradas(){ 
-        
-        try{
-            const promise = await axios.get('http://localhost:5000/moneys',config)
-            setDados(promise.data)
-            console.log(typeof(dados[1].value))
-            dados.map((dado,soma)=>{return(
-              soma =  parseFloat(dado.value) + soma
-             
-            )})
-           
-             for(let i=0;i<dados.length;i++){
-                 if(dados){
-                    console.log(dados[i].isEntry)
-                   // let number = parseInt(dados[i].value)
-                
-                    setTotal(300)
-             }
-             console.log(total)
-             }
-           
-          
-        }catch(error){
-            console.log(error)
-        }
-    }
-
-
     Permission()
-    Entradas()
-},[total,dados])
+},[])
 
 
   
@@ -73,7 +37,7 @@ export default function Lobby({name,token,setName,setToken}){
     return(
         <Main>
             <Header>
-               <h1>{name}</h1>
+               <h1>{nameUser}</h1>
             <Link to='/'><VscSignOut style={exit}/></Link> 
             </Header>
            
@@ -90,9 +54,8 @@ export default function Lobby({name,token,setName,setToken}){
                
             
             <Container>
-                 
                     <div>
-                    <Link to="/Deposit"  style={{ textDecoration: 'none',color:'#FFFFFF'}}>
+                    <Link to="/Deposit"  onClick={()=>{navigate("/Deposit",{state:{id:1,name:'sabaoon'}})}}style={{ textDecoration: 'none',color:'#FFFFFF'}}>
                     <VscDiffAdded style={add}/>
                     <h1>Nova entrada</h1>
                     </Link>
@@ -103,8 +66,6 @@ export default function Lobby({name,token,setName,setToken}){
                     <h1>Nova saída</h1> 
                     </Link>
                     </div>
-               
-               
             </Container>
         </Main>
     )

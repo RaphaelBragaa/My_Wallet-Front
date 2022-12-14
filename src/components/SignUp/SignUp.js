@@ -6,7 +6,6 @@ import * as service from "../../Services/wallet";
 
 
 export default function Signin(){
-    const {Sign}=useParams()
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -96,6 +95,9 @@ input::placeholder{
     color:#404040;
     font-family:'Lexend Deca',cursive;
     }
+input:autofill{
+    font-family:'Lexend Deca',cursive;
+}
 
 form{
     display:flex;

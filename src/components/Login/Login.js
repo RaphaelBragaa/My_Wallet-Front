@@ -21,7 +21,7 @@ export default function Login(){
             const promise= await service.signIn(body);
             localStorage.setItem(
             "wallet",
-            JSON.stringify({token: promise.data.token})
+            JSON.stringify({token: promise.data.token, name: promise.data.name})
            );
            navigate("/Lobby");
 

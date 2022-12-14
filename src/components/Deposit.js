@@ -1,12 +1,17 @@
 import styled from "styled-components"
 import { useParams, useNavigate,Link } from 'react-router-dom';
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 
 export default function Deposit({token}){
     const [value,setValue]=useState("")
     const [description,setDescription]=useState("")
     console.log(token)
+    const location = useLocation()
+    console.log("🚀 ~ file: deposit.js:12 ~ Deposit ~ location", location.state)
+    
+    
     
     const {Deposit}=useParams()
     const navigate=useNavigate()
@@ -24,7 +29,7 @@ export default function Deposit({token}){
         async function Inserir(event){
             event.preventDefault()
             try{
-              const promise = await axios.post('http://localhost:5000/moneys',body,config)
+              const promise = await axios.post('http://localhost:4000/cash',body,config)
               console.log(promise)
                 navigate("/Lobby")
             }catch(error){
