@@ -1,10 +1,10 @@
-import GlobalStyle from "./components/styles/GlobalStyles"
+import GlobalStyle from "./Components/Styles/GlobalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Login from "./components/Login/Login";
-import Sign from "./components/SignUp/SignUp";
-import Lobby from "./components/Lobby/Lobby";
-import Deposit from "./components/Deposit";
-import Out from "./components/Out";
+import Login from "./Components/Login/Login";
+import Sign from "./Components/SignUp/SignUp";
+import Lobby from "./Components/Lobby/Lobby";
+import Deposit from "./Components/Deposit";
+import Out from "./Components/Out";
 import { useState} from 'react';
 
 
