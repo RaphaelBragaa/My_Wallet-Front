@@ -12,22 +12,51 @@ import * as service from "../../Services/wallet"
 
 export default function Lobby({name,token,setName,setToken}){
     const navigate = useNavigate()
-    const[dados,setDados]=useState([])
-    const [total,setTotal]=useState(0)
+    // const[dados,setDados]=useState([])
+     const [totalValue,setTotalValue]=useState(0)
+    
     const nameUser = JSON.parse(localStorage.getItem("wallet"))?.name;
+    const dados = 
+        [ {date: '27/08/11',
+          description: 'paçoca',
+          value: -24,
+          isEntry: false},
+          {date: '27/08/11',
+          description: 'agiota',
+          value: 200,
+           isEntry: true}
+        //   {date: '27/08/11',
+        //   description: 'agiota',
+        //   value: -200,
+        //   isEntry: false}
+            ]
+            const totalValores = dados.reduce((sum, user) => sum + user.value, 0);
+            setTotalValue(totalValue + totalValores)
 
-   useEffect( ()=>{
-    async function Permission(){
-        try{
-          const promise = await service.listCash()
-            	setDados(promise.data)
-                console.log(promise)
-        }catch(error){
-            console.log(error)
-        }
-    }
-    Permission()
-},[])
+    // useEffect((dados) => {
+    //    async function sumValues(dados){
+    //     dados.forEach( dado => {
+    //         setTotalValue(totalValue += dado.value)
+    //     });
+    //     return totalValue;
+    // }
+    // sumValues()
+    // },[totalValue])
+    
+    
+
+//    useEffect( ()=>{
+//     async function Permission(){
+//         try{
+//           const promise = await service.listCash()
+//             	setDados(promise.data)
+//                 console.log(promise)
+//         }catch(error){
+//             console.log(error)
+//         }
+//     }
+//     Permission()
+// },[])
 
 
   
@@ -40,19 +69,21 @@ export default function Lobby({name,token,setName,setToken}){
                <h1>{nameUser}</h1>
             <Link to='/'><VscSignOut style={exit}/></Link> 
             </Header>
-           
                 <Dados>
-                     {/* <h2>
+                     { dados.length > 0 ?  
+                     (<Caixa>
+                     {dados.map((dado)=>{return(<Cash 
+                     date={dado.date} 
+                     description={dado.description} 
+                     value={dado.value} 
+                     isEntry={dado.isEntry}
+                     />)})}
+                    </Caixa> ) :
+                     (<h2>
                         Não há registros de entrada ou saída 
-                    </h2>  */}
-                    <Caixa>
-                     {dados.map((dado)=>{return(<Cash date={dado.date} description={dado.description} value={dado.value} isEntry={dado.isEntry}/>)})}
-                    </Caixa> 
-                    
-                     <Totally><h1>SALDO</h1><h6>...</h6></Totally> 
+                      </h2> )} 
+                     <Totally><h1>SALDO</h1><h6 cor={totalValue > 1 ? 'red':'green'}>{totalValores}</h6></Totally> 
                 </Dados> 
-               
-            
             <Container>
                     <div>
                     <Link to="/Deposit"  onClick={()=>{navigate("/Deposit",{state:{id:1,name:'sabaoon'}})}}style={{ textDecoration: 'none',color:'#FFFFFF'}}>
@@ -108,6 +139,7 @@ const Dados=styled.div`
     h2{
         background-color:#FFFFFF;
         text-align:center;
+        margin: auto;
         font-size:25px;
         color:#C2C2C2;
         width:45%;
@@ -161,7 +193,7 @@ const Totally=styled.div`
     }
     h6{
        margin-right:42px;
-       color:green;
+       color:${(props)=>props.cor};;
        background-color:#FFFFFF;
     }
 `
@@ -171,5 +203,6 @@ const Caixa=styled.div`
         flex-direction:column;
         justify-content: space-around;
         background-color:#FFFFFF;
+        
         
 `

@@ -7,33 +7,33 @@ export default function Cashi({date, description,value,isEntry}){
 
     return(
         <>
-        <Cash cor={isEntry ? 'green':'red'}><h3>{date}</h3> <h4>{description}</h4> <h5>{value}</h5></Cash>
+        <Cash cor={isEntry ? 'green':'red'}>
+            <h3>{date}</h3> <h4>{description}</h4> <h5>{value}</h5>
+        </Cash>
         </>
     )
 }
 
 const Cash=styled.div`
-
     display:flex;
-   
     background-color:#FFFFFF;
     font-size:20px;
     margin-bottom:20px;
-   
-
     h3{
         background-color:#FFFFFF;
         color:#DBDBDB;
         margin-right:20px;
+        position: relative;
     }
     h4{
+        flex:1;
         background-color:#FFFFFF;
-
     }
     h5{
+        flex:1;
         background-color:#FFFFFF;
-        margin-left:44vh; 
-        position:fixed;
+       margin-left:120vh; 
+        position: relative;
         color:${(props)=>props.cor};
     }
 `

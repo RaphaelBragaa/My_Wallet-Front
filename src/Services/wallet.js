@@ -1,18 +1,7 @@
 import axios from "axios";
+import createHeaders from "../utils/hooks/createHeaders";
 
-const API_URL= "http://localhost:4000";
-
-function createHeaders() {
-    const token = JSON.parse(localStorage.getItem("wallet"))?.token;
-
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        },
-    };
-
-    return config
-}
+const { REACT_APP_API_BASE_URL: API_URL } = process.env;
 
 function signIn(body) {
     const promise = axios.post(`${API_URL}/login`, body);
@@ -25,7 +14,6 @@ function signUp(body) {
 
     return promise;
 }
-//testes
 
 function insertCash(body) {
     const config = createHeaders();
