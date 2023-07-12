@@ -3,11 +3,9 @@ import { useNavigate,Link } from 'react-router-dom';
 import { VscSignOut} from "@react-icons/all-files/vsc/VscSignOut"
 import {VscDiffAdded } from "@react-icons/all-files/vsc/VscDiffAdded"
 import {VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved"
-import axios from 'axios'
 import { useEffect,useState } from "react";
-import {useLocation} from 'react-router-dom'
 import Cash from "../Cash";
-import * as service from "../../Services/wallet"
+
 
 
 export default function Lobby({name,token,setName,setToken}){

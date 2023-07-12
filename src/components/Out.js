@@ -1,46 +1,43 @@
 import styled from "styled-components"
-import { useParams, useNavigate,Link } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { useState } from "react";
-import axios from "axios";
+import { insertCash } from "../Services/wallet";
 
-export default function Out({token}){
+export default function Deposit(){
     const [value,setValue]=useState("")
     const [description,setDescription]=useState("")
-    console.log(token)
-    
-    const {Deposit}=useParams()
     const navigate=useNavigate()
-
-    const config={
-        headers:{Authorization:`Bearer ${token}`}
-    }
 
     const body={
         description,
         value,
-        isEntry:false
+        isEntry:true
     }
     
         async function Inserir(event){
             event.preventDefault()
             try{
-              const promise = await axios.post('http://localhost:4000/cash',body,config)
+              const promise = await insertCash(body)
               console.log(promise)
                 navigate("/Lobby")
             }catch(error){
                 alert(error)
             }
         }
+  
     return(
         <Main>
             <Header>
              Nova Saída
-            </Header>
+            </Header>  
             <Logo>
-            <form onSubmit={Inserir}>
+        <form onSubmit={Inserir}>
             <input type='text' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
             <input type='text' onChange={(e)=>setDescription(e.target.value)}placeholder='Descrição'/>
-            <button type='submit'>Salvar saída</button>
+           <button type='submit'>Salvar saída</button>
+           <Link to='/Lobby'>
+            <button type='submit'>Cancelar</button>
+           </Link>
         </form>
             </Logo>
         
@@ -67,6 +64,10 @@ const Header=styled.div`
         font-size:30px;
         color:#FFFFFF;
         margin-bottom:12px;
+        @media (max-width:767px) {
+           margin-top:3vh;
+           margin-bottom:3vh;
+        }
 `
 
 const Logo=styled.div`
@@ -94,8 +95,6 @@ const Logo=styled.div`
             border:none;
             height:5vh;
             padding-left:15px;
-
-
         }
         input::placeholder{
             margin-left:105px;
@@ -103,11 +102,9 @@ const Logo=styled.div`
             color:#404040;
             font-family:'Lexend Deca',cursive;
             }
-
         form{
             display:flex;
-            flex-direction:column;
-          
+            flex-direction:column;   
         }
         button{
             width:39rem;
@@ -123,8 +120,7 @@ const Logo=styled.div`
             :active{
                 background-color:#FFFFFF;
                 color:#A328D6;
-                    }
-            
+                    }  
         }
        
         h2{
@@ -134,5 +130,19 @@ const Logo=styled.div`
             color:#FFFFFF;
             font-family:'Lexend Deca',cursive;
         }
+        @media (max-width:767px) {
+
+            input{
+                width:50%;
+                margin:auto;
+                margin-bottom:5px;
+            }
+            button{
+               margin-top:2.5vh;
+               margin-bottom: 5px;;
+            }     
+        }
         `
+
+
 
