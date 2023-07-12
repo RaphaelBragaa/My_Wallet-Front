@@ -21,7 +21,7 @@ const Cash=styled.div`
     margin-bottom:20px;
     h3{
         background-color:#FFFFFF;
-        color:#DBDBDB;
+        color:#C9C9C9;
         margin-right:20px;
         position: relative;
     }
@@ -35,5 +35,10 @@ const Cash=styled.div`
        margin-left:120vh; 
         position: relative;
         color:${(props)=>props.cor};
+    }
+    @media (max-width:767px) {
+        h5{
+            margin-left:12vh;
+        }
     }
 `

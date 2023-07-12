@@ -12,10 +12,8 @@ import * as service from "../../Services/wallet"
 
 export default function Lobby({name,token,setName,setToken}){
      const navigate = useNavigate()
-    // // const[dados,setDados]=useState([])
      const [totalValue,setTotalValue]=useState(0)
-    
-    // const nameUser = JSON.parse(localStorage.getItem("wallet"))?.name;
+     const userName = JSON.parse(localStorage.getItem("wallet"))?.name;
      const dados = 
          [ {date: '27/08/11',
            description: 'paçoca',
@@ -30,34 +28,15 @@ export default function Lobby({name,token,setName,setToken}){
             value: -200,
             isEntry: false}
              ]
-             const totalValores = dados.reduce((sum, user) => sum + user.value, 0);
-             //setTotalValue(totalValue + totalValores)
+             useEffect(()=>{
 
-    // useEffect((dados) => {
-    //    async function sumValues(dados){
-    //     dados.forEach( dado => {
-    //         setTotalValue(totalValue += dado.value)
-    //     });
-    //     return totalValue;
-    // }
-    // sumValues()
-    // },[totalValue])
-    
-    
-
-//    useEffect( ()=>{
-//     async function Permission(){
-//         try{
-//           const promise = await service.listCash()
-//             	setDados(promise.data)
-//                 console.log(promise)
-//         }catch(error){
-//             console.log(error)
-//         }
-//     }
-//     Permission()
-// },[])
-
+                const calcularTotal = () => {
+    const totalValores = dados.reduce((sum, user) => sum + user.value, 0);
+    setTotalValue(totalValores);
+  };
+  calcularTotal();
+             },[])
+                
 
   
     
@@ -66,23 +45,23 @@ export default function Lobby({name,token,setName,setToken}){
     return(
         <Main>
             <Header>
-               <h1>Teste</h1>
+               <h1>{userName}</h1>
             <Link to='/'><VscSignOut style={exit}/></Link> 
             </Header>
             <Dados>
-                    { dados.length > 0 ?  
-                     (<Caixa>
-                     {dados.map((dado)=>{return(<Cash 
-                     date={dado.date} 
-                     description={dado.description} 
-                     value={dado.value} 
-                     isEntry={dado.isEntry}
-                     />)})}
-                    </Caixa> ) :
+                {dados.length > 0 ?  
+                 (<Caixa>
+                  {dados.map((dado)=>{return(<Cash 
+                   date={dado.date} 
+                   description={dado.description} 
+                   value={dado.value} 
+                   isEntry={dado.isEntry}
+                    />)})}
+                  </Caixa> ) :
                      (<h2>
                         Não há registros de entrada ou saída 
                       </h2> )} 
-                     <Totally><h1>SALDO</h1><h6 cor={totalValue > 1 ? 'red':'green'}>{totalValores}</h6></Totally> 
+                     <Totally><h1>SALDO</h1><h6 style={{ color: totalValue > 0 ? 'green' : 'red' }}>{totalValue}</h6></Totally> 
             </Dados>  
             <Container>
                     <div>
@@ -210,7 +189,6 @@ const Totally = styled.div`
 
     h6 {
         margin-right: 42px;
-        color: ${(props) => props.cor};
         background-color: #ffffff;
     }
 `;

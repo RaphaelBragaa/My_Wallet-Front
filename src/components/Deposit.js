@@ -2,6 +2,7 @@ import styled from "styled-components"
 import { useParams, useNavigate,Link } from 'react-router-dom';
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import { VscSignOut} from "@react-icons/all-files/vsc/VscSignOut"
 import axios from "axios";
 
 export default function Deposit({token}){
@@ -39,14 +40,17 @@ export default function Deposit({token}){
   
     return(
         <Main>
+            
             <Header>
              Nova Entrada
             </Header>
+             
             <Logo>
         <form onSubmit={Inserir}>
             <input type='text' onChange={(e)=>setValue(e.target.value)} placeholder='Valor' />
             <input type='text' onChange={(e)=>setDescription(e.target.value)}placeholder='Descrição'/>
            <button type='submit'>Salvar entrada</button>
+           <Link to='/Lobby'><button type='submit'>Cancelar</button></Link>
         </form>
             </Logo>
         
@@ -73,6 +77,10 @@ const Header=styled.div`
         font-size:30px;
         color:#FFFFFF;
         margin-bottom:12px;
+        @media (max-width:767px) {
+           margin-top:3vh;
+           margin-bottom:3vh;
+        }
 `
 
 const Logo=styled.div`
@@ -139,6 +147,20 @@ const Logo=styled.div`
             font-size:15px;
             color:#FFFFFF;
             font-family:'Lexend Deca',cursive;
+        }
+        @media (max-width:767px) {
+
+            input{
+                width:50%;
+                margin:auto;
+                margin-bottom:5px;
+            }
+            button{
+               margin-top:2.5vh;
+               margin-bottom: 5px;;
+            }
+            
+            
         }
         `
 
