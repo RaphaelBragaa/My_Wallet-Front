@@ -4,17 +4,22 @@ import { VscSignOut } from "@react-icons/all-files/vsc/VscSignOut";
 import { VscDiffAdded } from "@react-icons/all-files/vsc/VscDiffAdded";
 import { VscDiffRemoved } from "@react-icons/all-files/vsc/VscDiffRemoved";
 import { useEffect, useState } from "react";
-import Cash from "../Cash";
+import Cash from "../Cash/Cash";
+import * as Service from "../../Services/wallet";
 
 export default function Lobby({ name, token, setName, setToken }) {
   const navigate = useNavigate();
   const [totalValue, setTotalValue] = useState(0);
   const userName = JSON.parse(localStorage.getItem("wallet"))?.name;
-  const dados = [
-    { date: "27/08/11", description: "paçoca", value: -24, isEntry: false },
-    { date: "27/08/11", description: "agiota", value: 200, isEntry: true },
-    { date: "27/08/11", description: "agiota", value: -200, isEntry: false },
-  ];
+  const [dados, setDados] = useState([]);
+
+  useEffect(() => {
+    const req = Service.listCash();
+    req.then((res) => {
+      setDados(res.data);
+    });
+  }, [dados]);
+
   useEffect(() => {
     const calcularTotal = () => {
       const totalValores = dados.reduce((sum, user) => sum + user.value, 0);

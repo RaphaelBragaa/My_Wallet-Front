@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import { insertCash } from "../Services/wallet";
+import { insertCash } from "../../Services/wallet";
 
 export default function Deposit() {
   const [value, setValue] = useState("");
