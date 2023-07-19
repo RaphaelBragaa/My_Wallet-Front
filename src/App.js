@@ -1,4 +1,4 @@
-import GlobalStyle from "./Components/Styles/GlobalStyles";
+import GlobalStyle from "./Styles/GlobalStyles";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Sign from "./Components/SignUp/SignUp";
@@ -12,7 +12,7 @@ export default function App() {
   const [token, setToken] = useState("");
   return (
     <>
-      <GlobalStyle />
+      <GlobalStyle/>
       <BrowserRouter>
         <Routes>
           <Route
