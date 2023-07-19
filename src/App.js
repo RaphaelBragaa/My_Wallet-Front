@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Components/Login/Login";
 import Sign from "./Components/SignUp/SignUp";
 import Lobby from "./Components/Lobby/Lobby";
-import Deposit from "./Components/Deposit";
-import Out from "./Components/Out";
+import Deposit from "./Components/Deposit/Deposit";
+import Out from "./Components/Out/Out";
 import { useState } from "react";
 
 export default function App() {
